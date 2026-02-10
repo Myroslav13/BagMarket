@@ -1,8 +1,17 @@
 import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import ItemDisplay from './components/ItemDisplay'
+import NotFound from './components/NotFound'
 import type { Bag } from './interfaces'
 import axios from 'axios'
+import { createContext, useContext } from 'react'
+
+export interface AppContextType {
+   styleMode: 0 | 1;
+   itemsToDisplay: Bag[];
+}
+
+export const AppContext = createContext<AppContextType | undefined>(undefined);
 
 function App() {
    const [styleMode, setStyleMode] = useState<0 | 1>(Math.random() > 0.5 ? 1 : 0);
@@ -25,11 +34,14 @@ function App() {
 
    return (
       <>
-         <BrowserRouter>
-            <Routes>
-               <Route path="/store" element={<ItemDisplay itemsToDisplay={ itemsToDisplay } />}></Route>
-            </Routes>
-         </BrowserRouter>
+         <AppContext.Provider value={{ styleMode, itemsToDisplay }}>
+            <BrowserRouter>
+               <Routes>
+                  <Route path="/store" element={<ItemDisplay itemsToDisplay={itemsToDisplay} />}></Route>
+                  <Route path="*" element={<NotFound />}></Route>
+               </Routes>
+            </BrowserRouter>
+         </AppContext.Provider>
       </>
    )
 }

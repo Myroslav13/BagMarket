@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+body {
+   background-color: #122117;
+   color: white;
+   font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.price-and-rate {
+   @apply mt-0 text-[14px] text-[#96C4A8];
+}
