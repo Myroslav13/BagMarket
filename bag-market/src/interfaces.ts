@@ -3,7 +3,7 @@ interface Rating {
    count: number
 }
 
-export interface Bag {
+export interface Commodity {
    category: string,
    description: string,
    id: number,

@@ -1,11 +1,60 @@
 @import "tailwindcss";
 
+@theme { 
+   --color-yellow: #ffd600;
+   --color-yellow-hover: #ffb300;
+   --color-dark-green: #96C4A8;
+}
+
+html, body, #root {
+	height: 100%;
+}
+
 body {
-   background-color: #122117;
    color: white;
    font-family: 'Be Vietnam Pro', sans-serif;
 }
 
-.price-and-rate {
-   @apply mt-0 text-[14px] text-[#96C4A8];
+.div-price-and-rate-0 {
+   @apply flex gap-2 items-center font-bold;
+}
+
+.div-price-and-rate-1 {
+   @apply flex gap-[4px] items-center mt-0 text-[14px] text-[var(--color-dark-green)];
+}
+
+.item-name {
+   @apply text-[16px] leading-[24px] tracking-[0px];
+}
+
+.div-rating {
+   @apply flex items-center gap-1 py-1 px-2 border-4 border-black text-black bg-[var(--color-yellow)];
+}
+
+.item-description {
+   @apply text-[12px] text-black break-words;
+}
+
+.item-img {
+   @apply bg-white object-contain;
+}
+
+.btn-add-to-card {
+   @apply uppercase h-[30px] w-[calc(100%-32px)] bg-[var(--color-yellow)] absolute bottom-[16px] left-[16px] flex items-center justify-center gap-1 px-2 font-bold text-black border-3 border-black py-6 cursor-pointer hover:bg-[var(--color-yellow-hover)] shadow-[4px_4px_0_0_#000];
+}
+
+.style-name {
+   @apply m-[0px] text-[32px] leading-[40px] tracking-[0px];
+}
+
+.div-headline {
+   @apply h-[72px] w-full flex items-center p-[16px];
+}
+
+.div-flex {
+   @apply flex flex-wrap gap-[12px] p-[16px];
+}
+
+.div-grid {
+   @apply grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4;
 }

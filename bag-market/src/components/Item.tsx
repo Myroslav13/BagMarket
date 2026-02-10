@@ -1,26 +1,49 @@
-import { useContext, useState } from 'react'
-import type { Bag } from './../interfaces'
+import { useContext } from 'react'
+import type { Commodity } from './../interfaces'
 import { AppContext } from '../App'
+import { BsFillStarFill, BsCartFill } from "react-icons/bs";
 
 interface ItemProps {
-   item: Bag
+   itemData: Commodity
 }
 
-function Item({ item }: ItemProps) {
+function Item({ itemData }: ItemProps) {
    const context = useContext(AppContext);
    const styleMode = context?.styleMode;
+   const width = styleMode === 0 ? '240px' : '176px';
 
    return (
-      <div className='max-w-[176px]'>
-         <img src={item.image} alt={item.title} title={item.title} draggable={false} className='w-[176px] h-[176px] rounded-[4px] bg-white object-contain' />
+      <div className={styleMode === 0 ? 'bg-white border-3 border-black relative shadow-[4px_4px_0_0_#000]' : 'w-[176px]'}>
+         <img src={ itemData.image } alt={ itemData.title } title={ itemData.title } draggable={ false } className={`item-img w-full p-3 ${styleMode === 0 ? 'border-b-3 border-black' : 'rounded-[4px]'}`} style={{ height: width }} />
+         
+         { styleMode === 0 ?
+         <div className='p-[16px] pb-[74px]'>
+            <div className='mb-[12px]'>
+               <h2 className='item-name text-black' style={{ fontWeight: 500 }}>{ itemData.title }</h2>
+               <div className='div-price-and-rate-0'>
+                  <p className='text-black'>${ itemData.price }</p>
+
+                  <div className='div-rating'>
+                     <BsFillStarFill size={8}/>
+                     <p className='text-[10px]'>{ itemData.rating.rate }</p>
+                  </div>
+               </div>
+            </div>
+            <p className='item-description'>{ itemData.description }</p>
+            <button className='btn-add-to-card'>Add to cart <BsCartFill size={16} /></button>
+         </div>
+
+         :
+
          <div className='my-[12px]'>
-            <h2 className='text-white text-[16px] leading-[24px] tracking-[0px]' style={{ fontWeight: 500 }}>{item.title}</h2>
-            <div className='flex gap-[4px] items-center'>
-               <p className='price-and-rate'>${item.price}</p>
-               <p className='price-and-rate'>•</p>
-               <p className='price-and-rate'>{item.rating.rate} ({item.rating.count})</p>
+            <h2 className='item-name text-white' style={{ fontWeight: 500 }}>{ itemData.title }</h2>
+            <div className='div-price-and-rate-1'>
+               <p>${ itemData.price }</p>
+               <p>•</p>
+               <p>{ itemData.rating.rate } ({ itemData.rating.count })</p>
             </div>
          </div>
+         }
       </div>
    )
 }
